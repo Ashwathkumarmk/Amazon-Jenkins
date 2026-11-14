@@ -6,7 +6,7 @@ pipeline {
 
         stage('Compile') {
             steps {
-                sh 'mvn invalidcommand'
+                sh 'mvn compile'
             }
         }
 
