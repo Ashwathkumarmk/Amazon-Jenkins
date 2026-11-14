@@ -19,7 +19,7 @@ pipeline {
 
     post {
         success {
-            echo 'Build success through GitHub webhook'
+            echo 'Build success through GitHub webhook.'
         }
 
         failure {
