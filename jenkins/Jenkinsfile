@@ -17,13 +17,37 @@ pipeline {
         }
     }
 
-    post {
-        success {
-            echo 'Build success through GitHub webhook.'
-        }
+   post {
+    success {
+        emailext(
+            to: 'ashwathkumar.mk@gmail.com',
+            subject: "BUILD SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """
+            Hello,
 
-        failure {
-            echo 'Failure in the build'
-        }
+            Jenkins build completed successfully.
+
+            Job: ${env.JOB_NAME}
+            Build Number: ${env.BUILD_NUMBER}
+            Build URL: ${env.BUILD_URL}
+            """
+        )
     }
+
+    failure {
+        emailext(
+            to: 'ashwathkumar.mk@gmail.com',
+            subject: "BUILD FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """
+            Hello,
+
+            Jenkins build failed.
+
+            Job: ${env.JOB_NAME}
+            Build Number: ${env.BUILD_NUMBER}
+            Build URL: ${env.BUILD_URL}
+            """
+        )
+    }
+}
 }
