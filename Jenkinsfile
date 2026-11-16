@@ -22,17 +22,29 @@ pipeline {
         
     }
 
-  post{
+post {
+    success {
+        echo 'Build success through GitHub webhook'
 
-  success{
-     echo 'Build success through GitHub webhook'
-  }
-    
-  failure{
-       echo 'Failure in the build'
-   }
+        publishChecks(
+            name: 'Jenkins-CI-Status',
+            title: 'Amazon Jenkins CI Build',
+            summary: 'Maven CI pipeline execution',
+            text: 'Checkout, Compile, Test and Build completed'
+        )
+    }
 
-  }
+    failure {
+        echo 'Failure in the build'
+
+        publishChecks(
+            name: 'Jenkins-CI-Status',
+            title: 'Amazon Jenkins CI Build',
+            summary: 'Maven CI pipeline failed',
+            text: 'Please check Jenkins Console Output'
+        )
+    }
+}
 
 
 }
