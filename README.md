@@ -7,3 +7,4 @@ CI Pipeline:
 2. Compile
 3. Test
 4. Build
+Jenkins CI integration testing
